@@ -1,0 +1,114 @@
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const w = canvas.width;
+    const h = canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+
+    // --- LINHAS E ESTRUTURA ---
+    ctx.strokeStyle = 'green';
+    ctx.lineWidth = 1;
+
+    // Linha horizontal central
+    ctx.beginPath();
+    ctx.moveTo(0, cy);
+    ctx.lineTo(w, cy);
+    ctx.stroke();
+
+    // Linha vertical inferior (cinza escuro)
+    ctx.strokeStyle = '#555';
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx, h);
+    ctx.stroke();
+
+    // --- ARCOS SUPERIORES ---
+    ctx.strokeStyle = 'green';
+    // Arcos concêntricos no topo
+    function drawArc(radius) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, Math.PI, 0);
+        ctx.stroke();
+    }
+    drawArc(50);
+    drawArc(70);
+    drawArc(90);
+
+    // --- ARCOS INFERIORES ---
+    // Arco inferior esquerdo
+    ctx.beginPath();
+    ctx.arc(cx, h, 80, Math.PI, 1.5 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(cx, h, 100, Math.PI, 1.5 * Math.PI);
+    ctx.stroke();
+
+    // Arco inferior direito
+    ctx.beginPath();
+    ctx.arc(cx, h, 80, 1.5 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+
+    // --- FORMAS COLORIDAS ---
+
+    // Topo Esquerdo: Quadrado Azul
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(0, 0, 70, 70);
+    ctx.strokeStyle = 'blue';
+    ctx.beginPath(); ctx.moveTo(70, 70); ctx.lineTo(cx, cy); ctx.stroke();
+
+    // Topo Direito: Quadrado Vermelho
+    ctx.fillStyle = 'red';
+    ctx.fillRect(w - 70, 0, 70, 70);
+    ctx.strokeStyle = 'red';
+    ctx.beginPath(); ctx.moveTo(w - 70, 70); ctx.lineTo(cx, cy); ctx.stroke();
+
+    // Centro Superior: Círculo Ciano
+    ctx.fillStyle = 'cyan';
+    ctx.beginPath();
+    ctx.arc(cx, cy - 40, 20, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'blue'; ctx.stroke();
+
+    // Meio Esquerda: Retângulo Ciano (dividido pela linha verde)
+    ctx.fillStyle = 'cyan';
+    ctx.fillRect(0, cy - 35, 40, 70);
+
+    // Meio Direita: Retângulo Ciano pequeno
+    ctx.fillRect(w - 40, cy - 20, 40, 40);
+
+    // Centro Inferior: Quadrado Vermelho (deslocado para esquerda)
+    ctx.fillStyle = 'red';
+    ctx.fillRect(cx - 50, cy, 50, 50);
+
+    // Círculos Amarelos (Inferiores)
+    ctx.fillStyle = 'yellow';
+    ctx.strokeStyle = 'green';
+    // Esquerdo
+    ctx.beginPath(); ctx.arc(cx - 100, cy + 90, 25, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    // Direito
+    ctx.beginPath(); ctx.arc(cx + 80, cy + 90, 25, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+    // Formas nos Cantos Inferiores (L-shapes)
+    // Amarelo (Inferior Esquerdo)
+    ctx.fillStyle = 'yellow';
+    ctx.fillRect(0, h - 80, 40, 80);
+    ctx.fillRect(0, h - 40, 80, 40);
+
+    // Preto (Inferior Direito)
+    ctx.fillStyle = 'black';
+    ctx.fillRect(w - 40, h - 80, 40, 80);
+    ctx.fillRect(w - 80, h - 40, 80, 40);
+
+    // Meio Círculo Ciano (Base)
+    ctx.fillStyle = 'cyan';
+    ctx.beginPath();
+    ctx.arc(cx, h, 60, Math.PI, 0);
+    ctx.fill();
+    ctx.strokeStyle = 'green'; ctx.stroke();
+
+    // --- TEXTO ---
+    ctx.fillStyle = '#555';
+    ctx.font = '24px Arial';
+    ctx.fillText('Canvas', cx - 45, 90);

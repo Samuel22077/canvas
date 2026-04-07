@@ -1,0 +1,10 @@
+#canvas{
+    color: rgb(38, 113, 173);
+    color: rgba(165, 42, 42, 0.877);
+    background-color: rgb(68, 190, 180);
+}
+
+body{
+display: flex;
+justify-content: center;
+}
